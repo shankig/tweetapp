@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import render_template
 from flask import redirect, render_template
@@ -10,8 +11,9 @@ from flask import jsonify
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
-twitter_consumer_key = "************************"
-twitter_consumer_secret = "************************"
+twitter_consumer_key = os.environ['TWITTER_CONSUMER_KEY']
+twitter_consumer_secret = os.environ['TWITTER_CONSUMER_SECRET']
+
 
 oauth = OAuth(app)
 twitter = oauth.remote_app(
@@ -46,7 +48,7 @@ def login():
 @app.route('/oauthorized')
 def oauthorized():
     resp = twitter.authorized_response()
-    print dir(twitter)
+    
     if resp is None:
         flash('You denied the request to sign in.')
     else:
@@ -59,12 +61,13 @@ def dashboard():
     recent_tweets = []
     screen_name = session['twitter_oauth']['screen_name']
     me =  twitter.get('users/show.json?screen_name=%s' % screen_name)
-        
+    
     return render_template(
         'dashboard.html', data={
             'user_name': me.data['name'],
             'screen_name': screen_name,
             'profile_image_url': me.data['profile_image_url'],
+            'profile_background_image_url': me.data['profile_background_image_url'],
             'recent_tweets': get_tweets()
         }
     )
