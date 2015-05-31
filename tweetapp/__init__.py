@@ -67,6 +67,7 @@ def dashboard():
             'screen_name': screen_name,
             'profile_image_url': me.data['profile_image_url'],
             'profile_background_image_url': me.data['profile_background_image_url'],
+            'profile_background_color': me.data['profile_background_color'],
             'recent_tweets': get_tweets()
         }
     )
