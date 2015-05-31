@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask import render_template
 from flask import redirect, render_template
@@ -11,8 +10,8 @@ from flask import jsonify
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
-twitter_consumer_key = os.environ['TWITTER_CONSUMER_KEY']
-twitter_consumer_secret = os.environ['TWITTER_CONSUMER_SECRET']
+twitter_consumer_key = ''
+twitter_consumer_secret = ''
 
 
 oauth = OAuth(app)
