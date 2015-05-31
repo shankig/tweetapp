@@ -10,6 +10,7 @@ function tweet() {
     var tweet_text = $("#id-tweet-text").val();
     $.post("/tweet", {'tweet_text': tweet_text}, function(data) {
         if(data['status']) {
+            $("#id-tweet-text").val("");
             render_post(data['recent_tweets']);
         } else {
             alert(data['msg']);
