@@ -27,7 +27,6 @@ function render_post(data) {
     
 }
 
-
 $(function () {
-    $("#id-tweet-text").bind('input propertychange', tweet_bind);
+    
 });
