@@ -16,7 +16,12 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
   <script>
 	$(function () {
-	  $('body').css('background-image', 'url({{data["profile_background_image_url"]}})');
+	  $('body').css({
+		'background-image':'url({{data["profile_background_image_url"]}})',
+		'background-repeat': 'no-repeat',
+		'background-color': '#{{data["profile_background_color"]}}'
+	  });
+	  
 	  $("#id-tweet-text").bind('input propertychange', tweet_bind);
 	});
   </script>
