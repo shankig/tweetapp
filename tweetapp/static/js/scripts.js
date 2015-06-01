@@ -7,11 +7,13 @@ function tweet_bind() {
 }
 
 function tweet() {
+    $("#id-loader").removeClass("hide");
+    $("#id-tweet-button").addClass("disabled");
     var tweet_text = $("#id-tweet-text").val();
     $.post("/tweet", {'tweet_text': tweet_text}, function(data) {
+        $("#id-loader").addClass("hide");
+        $("#id-tweet-text").val("");
         if(data['status']) {
-            $("#id-tweet-button").addClass("disabled");
-            $("#id-tweet-text").val("");
             render_post(data['recent_tweets']);
         } else {
             alert(data['msg']);
